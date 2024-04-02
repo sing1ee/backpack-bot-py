@@ -5,9 +5,6 @@ from bpx.bpx_pub import *
 import time
 
 
-# self.logger(API_KEY, API_SECRET, WISH_VOLUME, ITER_NUM, run_pair, pair_name, run_pair)
-
-
 class TradeBot:
 
     def __init__(self, data, emit) -> None:
