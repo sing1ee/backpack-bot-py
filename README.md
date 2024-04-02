@@ -25,4 +25,5 @@ MIN_PAIR: '100' # 每次交易 目标 token 的量，越小磨损越小，但是
 ![image](https://github.com/sing1ee/backpack-bot-py/assets/1057882/fa679ff0-26da-4c2e-9997-1b65f1cfa446)
 
 # Thanks
-![backpack-faskety-auto-trade]https://github.com/yuankongzhe/backpack-faskety-auto-trade?tab=readme-ov-file Author:![0xfaskety]https://twitter.com/0xfaskety
+Github: [backpack-faskety-auto-trade](https://github.com/yuankongzhe/backpack-faskety-auto-trade)
+Author: [0xfaskety](https://twitter.com/0xfaskety)
