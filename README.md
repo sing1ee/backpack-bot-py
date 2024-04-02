@@ -20,3 +20,6 @@ PAIR_ACCURACY: '2' # 交易对价格精度
 MIN_USDC: '200' # 每次交易 usdc 的量，越小磨损越小，但是达到目标交易量越慢
 MIN_PAIR: '100' # 每次交易 目标 token 的量，越小磨损越小，但是达到目标交易量越慢
 ```
+
+# Screen
+![image](https://github.com/sing1ee/backpack-bot-py/assets/1057882/fa679ff0-26da-4c2e-9997-1b65f1cfa446)
