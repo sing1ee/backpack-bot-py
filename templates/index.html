@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Bot</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+</head>
+<body>
+    <div class="container mx-auto my-10">
+        <h1 class="text-3xl font-bold mb-6">Trading Bot</h1>
+        <form id="trading-form" class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="API_KEY" class="block font-medium mb-2">API Key</label>
+                <input type="text" id="API_KEY" name="API_KEY" value="{{ form_data['API_KEY'] }}" class="border rounded px-3 py-2 w-full">
+            </div>
+            <div>
+                <label for="API_SECRET" class="block font-medium mb-2">API Secret</label>
+                <input type="text" id="API_SECRET" name="API_SECRET" value="{{ form_data['API_SECRET'] }}" class="border rounded px-3 py-2 w-full">
+            </div>
+            <div>
+                <label for="WISH_VOLUME" class="block font-medium mb-2">Wish Volume</label>
+                <input type="number" id="WISH_VOLUME" name="WISH_VOLUME" value="{{ form_data['WISH_VOLUME'] }}" class="border rounded px-3 py-2 w-full">
+            </div>
+            <div>
+                <label for="ITER_NUM" class="block font-medium mb-2">Iteration Number</label>
+                <input type="number" id="ITER_NUM" name="ITER_NUM" value="{{ form_data['ITER_NUM'] }}" class="border rounded px-3 py-2 w-full">
+            </div>
+            <div>
+                <label for="TRADE_TOKEN" class="block font-medium mb-2">Trade Token</label>
+                <input type="text" id="TRADE_TOKEN" name="TRADE_TOKEN" value="{{ form_data['TRADE_TOKEN'] }}" class="border rounded px-3 py-2 w-full">
+            </div>
+            <div>
+                <label for="TRADE_PAIR" class="block font-medium mb-2">Trade Pair</label>
+                <input type="text" id="TRADE_PAIR" name="TRADE_PAIR" value="{{ form_data['TRADE_PAIR'] }}" class="border rounded px-3 py-2 w-full">
+            </div>
+            <div>
+                <label for="PAIR_ACCURACY" class="block font-medium mb-2">Pair Accuracy</label>
+                <input type="number" id="PAIR_ACCURACY" name="PAIR_ACCURACY" value="{{ form_data['PAIR_ACCURACY'] }}" class="border rounded px-3 py-2 w-full">
+            </div>
+            <div>
+                <label for="MIN_USDC" class="block font-medium mb-2">Minimum USDC</label>
+                <input type="number" id="MIN_USDC" name="MIN_USDC" value="{{ form_data['MIN_USDC'] }}" class="border rounded px-3 py-2 w-full">
+            </div>
+            <div>
+                <label for="MIN_PAIR" class="block font-medium mb-2">Minimum Pair</label>
+                <input type="number" id="MIN_PAIR" name="MIN_PAIR" value="{{ form_data['MIN_PAIR'] }}" class="border rounded px-3 py-2 w-full">
+            </div>
+        </form>
+        <div class="flex justify-end mt-4">
+            <button id="start-bot" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Start</button>
+            <button id="stop-bot" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded  mr-2">Stop</button>
+            <button id="clear-log" class="bg-yellow-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear Log</button>
+        </div>
+        <div class="mt-8 h-500 overflow-auto border rounded p-4">
+            <h2 class="text-xl font-bold mb-4">Log</h2>
+            <div id="log-container"></div>
+        </div>
+    </div>
+
+    <script>
+        var socket = io();
+
+        document.getElementById('start-bot').addEventListener('click', function() {
+            socket.emit('submit_form', {
+                API_KEY: document.getElementById('API_KEY').value,
+                API_SECRET: document.getElementById('API_SECRET').value,
+                WISH_VOLUME: document.getElementById('WISH_VOLUME').value,
+                ITER_NUM: document.getElementById('ITER_NUM').value,
+                TRADE_TOKEN: document.getElementById('TRADE_TOKEN').value,
+                TRADE_PAIR: document.getElementById('TRADE_PAIR').value,
+                PAIR_ACCURACY: document.getElementById('PAIR_ACCURACY').value,
+                MIN_USDC: document.getElementById('MIN_USDC').value,
+                MIN_PAIR: document.getElementById('MIN_PAIR').value
+            });
+        });
+
+        document.getElementById('stop-bot').addEventListener('click', function() {
+            socket.emit('stop_bot');
+        });
+        document.getElementById('clear-log').addEventListener('click', function() {
+            var logContainer = document.getElementById('log-container');
+            while (logContainer.firstChild) {
+                logContainer.removeChild(logContainer.firstChild);
+            }
+        });
+        socket.on('log_update', function(message) {
+            var logContainer = document.getElementById('log-container');
+            var logEntry = document.createElement('div');
+            logEntry.textContent = message;
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        });
+    </script>
+</body>
+</html>
