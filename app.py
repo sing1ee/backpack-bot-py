@@ -45,7 +45,11 @@ def handle_form_submit(form_data):
             logger("停止")
             break
         logger(f"第{i}轮")
-        bot.one_iter()
+        try:
+            bot.one_iter()
+        except:
+            logger("交易所网络拥堵，继续")
+            pass
 
 
 @app.route("/")

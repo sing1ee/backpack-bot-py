@@ -69,7 +69,7 @@ class TradeBot:
 
                 self.logger(f"try sell {sol_available} {self.run_pair} at {asks_price}")
                 return sol_available * asks_price
-            elif usdc_available > 5:
+            elif usdc_available > 1:
                 bids_price = bids_price + 1 / int(10**self.pair_accuracy)
 
                 self.bpx.ExeOrder(
