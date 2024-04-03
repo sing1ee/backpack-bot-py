@@ -60,4 +60,10 @@ def handle_stop_bot():
 
 
 if __name__ == "__main__":
-    socketio.run(app, port=5001, debug=True)
+    import sys
+
+    if len(sys.argv) < 2:
+        print("Usage: python app.py <port>")
+        exit(1)
+    port = int(sys.argv[1])
+    socketio.run(app, port=port, debug=True)
