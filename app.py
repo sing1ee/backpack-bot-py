@@ -66,4 +66,4 @@ if __name__ == "__main__":
         print("Usage: python app.py <port>")
         exit(1)
     port = int(sys.argv[1])
-    socketio.run(app, port=port, debug=True)
+    socketio.run(app, host="0.0.0.0", port=port, debug=True)
