@@ -50,3 +50,4 @@ test_.py
 
 *.yaml
 *.zip
+venv
