@@ -9,13 +9,13 @@ socketio = SocketIO(app)
 default_form_data = {
     "API_KEY": "",
     "API_SECRET": "",
-    "WISH_VOLUME": 100,
+    "WISH_VOLUME": 300,
     "ITER_NUM": 2,
     "TRADE_TOKEN": "WEN",
     "TRADE_PAIR": "WEN_USDC",
     "PAIR_ACCURACY": 8,
-    "MIN_USDC": 20,
-    "MIN_PAIR": 10000,
+    "MIN_USDC": 30,
+    "MIN_PAIR": 100000,
 }
 
 # 保存表单数据
@@ -37,7 +37,7 @@ def handle_form_submit(form_data):
     global is_running
     is_running = True
     # while is_running:
-    #     socketio.emit("log_update", "1")
+    #     socketio.emit("log_update", form_data["ITER_NUM"])
     #     socketio.sleep(2)
     bot = TradeBot(form_data, logger)
     for i in range(bot.ITER_NUM):
